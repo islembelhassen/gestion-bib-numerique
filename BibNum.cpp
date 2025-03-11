@@ -17,7 +17,7 @@ BibNum::BibNum(string nom,int nbrdoc)
     }
 }
 
-BibNum::BibNum(BibNum& b)
+BibNum::BibNum(const BibNum& b)
 {
     nom=b.nom;
     nbrdoc=b.nbrdoc;

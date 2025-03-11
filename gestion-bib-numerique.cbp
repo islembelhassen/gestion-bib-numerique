@@ -33,13 +33,23 @@
 			<Add option="-fexceptions" />
 		</Compiler>
 		<Unit filename="Admin.h" />
+		<Unit filename="Audio.cpp" />
+		<Unit filename="Audio.h" />
 		<Unit filename="BibNum.cpp" />
 		<Unit filename="BibNum.h" />
 		<Unit filename="Date.h" />
 		<Unit filename="Document.cpp" />
 		<Unit filename="Document.h" />
 		<Unit filename="Lecteur.h" />
+		<Unit filename="Livre.cpp" />
+		<Unit filename="Livre.h" />
+		<Unit filename="LivreAudio.cpp" />
+		<Unit filename="LivreAudio.h" />
+		<Unit filename="Magazine.cpp" />
+		<Unit filename="Magazine.h" />
 		<Unit filename="Personne.h" />
+		<Unit filename="RechercheScientifique.cpp" />
+		<Unit filename="RechercheScientifique.h" />
 		<Unit filename="Role.h" />
 		<Unit filename="main.cpp" />
 		<Extensions />

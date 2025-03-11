@@ -1,0 +1,52 @@
+# depslib dependency file v1.0
+1741671753 source:c:\users\ons\desktop\enicar\1ère année\semestre 2\programmation orienté objet\projet\projet\gestion-bib-numerique\main.cpp
+	<iostream>
+
+1741709659 source:c:\users\ons\desktop\enicar\1ère année\semestre 2\programmation orienté objet\projet\projet\gestion-bib-numerique\livre.cpp
+	<iostream>
+	<string>
+	"Document.h"
+	"Livre.h"
+
+1741710846 c:\users\ons\desktop\enicar\1ère année\semestre 2\programmation orienté objet\projet\projet\gestion-bib-numerique\document.h
+	<string>
+	<vector>
+
+1741709659 c:\users\ons\desktop\enicar\1ère année\semestre 2\programmation orienté objet\projet\projet\gestion-bib-numerique\livre.h
+	"Document.h"
+	<string>
+
+1741709943 source:c:\users\ons\desktop\enicar\1ère année\semestre 2\programmation orienté objet\projet\projet\gestion-bib-numerique\magazine.cpp
+	<iostream>
+	<string>
+	"Magazine.h"
+	"Document.h"
+
+1741709943 c:\users\ons\desktop\enicar\1ère année\semestre 2\programmation orienté objet\projet\projet\gestion-bib-numerique\magazine.h
+	"Document.h"
+	<string>
+
+1741710118 source:c:\users\ons\desktop\enicar\1ère année\semestre 2\programmation orienté objet\projet\projet\gestion-bib-numerique\recherchescientifique.cpp
+	<iostream>
+	<string>
+	"Document.h"
+	"RechercheScientifique.h"
+
+1741710118 c:\users\ons\desktop\enicar\1ère année\semestre 2\programmation orienté objet\projet\projet\gestion-bib-numerique\recherchescientifique.h
+	<string>
+	"Document.h"
+
+1741710263 source:c:\users\ons\desktop\enicar\1ère année\semestre 2\programmation orienté objet\projet\projet\gestion-bib-numerique\audio.cpp
+	<iostream>
+	<string>
+	"Audio.h"
+
+1741710263 c:\users\ons\desktop\enicar\1ère année\semestre 2\programmation orienté objet\projet\projet\gestion-bib-numerique\audio.h
+	<string>
+
+1741710846 source:c:\users\ons\desktop\enicar\1ère année\semestre 2\programmation orienté objet\projet\projet\gestion-bib-numerique\document.cpp
+	"Document.h"
+	<string>
+	<vector>
+	<iostream>
+

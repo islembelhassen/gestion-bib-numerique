@@ -33,7 +33,11 @@
 			<Add option="-fexceptions" />
 		</Compiler>
 		<Unit filename="Admin.h" />
+		<Unit filename="BibNum.cpp" />
+		<Unit filename="BibNum.h" />
 		<Unit filename="Date.h" />
+		<Unit filename="Document.cpp" />
+		<Unit filename="Document.h" />
 		<Unit filename="Lecteur.h" />
 		<Unit filename="Personne.h" />
 		<Unit filename="Role.h" />

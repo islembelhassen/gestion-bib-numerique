@@ -18,8 +18,9 @@ class Personne {
         vector<Document*> documents;
     public:
         Personne();
-        Personne(string,string, Date,string,string);
-        virtual void saisir();
+        Personne(string,string, Date,string,int);
+        Personne(const Personne&);
+        virtual void saisir()=0;
         virtual void afficher();
         void set_nom(string);
         void set_prenom(string);

@@ -10,7 +10,7 @@ class Admin : public Personne , public Role {
         string idA;
         vector<Lecteur*> lecteurs;
     public:
-        Admin(string, string, DATE, string,string, DATE,string);
+        Admin(string,string, Date,string,int,string, float,Date,string);
         void set_idA(string);
         void set_date_prise_fct(DATE);
         string get_idA();

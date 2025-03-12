@@ -35,6 +35,7 @@
 		<Unit filename="Admin.h" />
 		<Unit filename="Date.h" />
 		<Unit filename="Lecteur.h" />
+		<Unit filename="Personne.cpp" />
 		<Unit filename="Personne.h" />
 		<Unit filename="Role.h" />
 		<Unit filename="main.cpp" />

@@ -14,6 +14,14 @@ class Date {
         void afficher(){
             cout << jour << "/" << mois << "/" << annee << endl;
         }
+        void saisir(){
+            cout << " jour: ";
+            cin>>jour;
+            cout<< " mois: " ;
+            cin>> mois;
+            cout << " annee: ";
+            cin>> annee;
+    }
 
 };
 #endif // DATE_H_INCLUDED

@@ -14,22 +14,23 @@ class Personne {
         string prenom;
         string email;
         int tel;
-        DATE datenaissance;
+        Date datenaissance;
         vector<Document*> documents;
     public:
-        Personne(string,string, DATE,string,string);
+        Personne();
+        Personne(string,string, Date,string,string);
         virtual void saisir();
         virtual void afficher();
         void set_nom(string);
         void set_prenom(string);
         void set_email(string);
         void set_tel(int);
-        void set_datenaissance(DATE);
+        void set_datenaissance(Date);
         string get_nom();
         string get_prenom();
         string get_email();
         int get_tel();
-        DATE get_datenaissance();
+        Date get_datenaissance();
 
         void ajouterDoc(Document*);
         void supprimerDoc(Document*);

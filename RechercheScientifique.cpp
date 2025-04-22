@@ -34,3 +34,20 @@ string RechercheScientifique::get_institut()
 }
 
 RechercheScientifique::~RechercheScientifique(){}
+
+ostream& operator<<(ostream& o,RechercheScientifique& r)
+{
+    Document* d=&r;
+    o<<*d;
+    o<<"Institut: "<<r.institut<<endl;
+    return o;
+}
+
+istream& operator>>(istream& i,RechercheScientifique& r)
+{
+    Document* d=&r;
+    i>>*d;
+    cout<<"Donner l'institut: ";
+    i>>r.institut;
+    return i;
+}

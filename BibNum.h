@@ -1,8 +1,10 @@
 #ifndef BIBNUM_H_INCLUDED
 #define BIBNUM_H_INCLUDED
+
 #include"Document.h"
 #include<string>
 #include<vector>
+#include<fstream>
 using namespace std;
 
 class BibNum{
@@ -10,7 +12,7 @@ string nom;
 int nbrdoc;
 vector<Document*> documents;
 public:
-    BibNum(string,int);
+    BibNum(string="",int=0);
     BibNum(const BibNum&);
     void saisir();
     void afficher();
@@ -19,8 +21,18 @@ public:
     string get_nom();
     int get_nbrdoc();
     void ajouter_doc();
-    void supprimer_doc();
+    void supprimer_doc(string);
+    friend ostream& operator<<(ostream&,BibNum&);
+    friend ostream& operator<<(ostream&,BibNum*);
+    friend istream& operator>>(istream&,BibNum&);
+    friend istream& operator>>(istream&,BibNum*);
+    BibNum& operator=(const BibNum&);
+    void ouvrir_fichier(fstream&);
+    void saisir_dans_fichier(fstream&);
+    void afficher_du_fichier(fstream&);
     ~BibNum();
-};
+}; ostream& operator<<(ostream&,BibNum&);
+   istream& operator>>(istream&,BibNum&);
+
 
 #endif // BIBNUM_H_INCLUDED

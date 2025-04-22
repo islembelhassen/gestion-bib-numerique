@@ -34,7 +34,7 @@ class Personne {
         Date get_datenaissance();
 
         void ajouterDoc(Document*);
-        void supprimerDoc(Document*);
+        void supprimerDoc(string id);
         virtual ~Personne();
 };
 

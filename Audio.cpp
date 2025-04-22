@@ -44,3 +44,19 @@ string Audio::get_type()
 }
 
 Audio::~Audio(){}
+
+ostream& operator<<(ostream& o,Audio& au)
+{
+    o<<"Duree: "<<au.duree<<endl;
+    o<<"Type: "<<au.type<<endl;
+    return o;
+}
+
+istream& operator>>(istream& i, Audio& au)
+{
+    cout<<"Donner la duree de l'audio: ";
+    i>>au.duree;
+    cout<<"Donner le type de l'audio: ";
+    i>>au.type;
+    return i;
+}

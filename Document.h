@@ -1,7 +1,9 @@
 #ifndef DOCUMENT_H_INCLUDED
 #define DOCUMENT_H_INCLUDED
+
 #include<string>
 #include<vector>
+#include<fstream>
 using namespace std;
 
 class Document{
@@ -26,7 +28,12 @@ public:
     float get_prix();
     //
     //Date get_datepub();
+    friend ostream& operator<<(ostream&,Document&);
+    friend ostream& operator<<(ostream&,Document*);
+    friend istream& operator>>(istream&,Document&);
     virtual ~Document();
-};
+}; ostream& operator<<(ostream&,Document&);
+   istream& operator>>(istream&,Document&);
+
 
 #endif // DOCUMENT_H_INCLUDED

@@ -1,6 +1,12 @@
 #include "Personne.h"
 #include "Date.h"
 
+#include"Document.h"
+#include"Livre.h"
+#include"LivreAudio.h"
+#include"Magazine.h"
+#include"RechercheScientifique.h"
+
 Personne::Personne()
     : nom(""), prenom(""), email(""), tel(0),datenaissance() {}
 
@@ -38,7 +44,7 @@ void Personne::saisir() {
     cout<<" Les documents:"<<endl;
     while (true){
         cout<<"  choisir type document: "<<endl;
-        cout << "   1 --> Livre" << sendl;
+        cout << "   1 --> Livre" << endl;
         cout << "   2 --> Recherche Scientifique" << endl;
         cout << "   3 --> Magazine" << endl;
         cout << "   4 --> Livre Audio" << endl;
@@ -51,10 +57,10 @@ void Personne::saisir() {
 
         Document* doc = NULL;
             switch (choix){
-                case 1: doc = new Livre(); break;
-                case 2: doc = new RechercheScientifique(); break;
-                case 3: doc = new Magazine(); break;
-                case 4: doc = new LivreAudio(); break;
+                case 1: doc = new Livre; break;
+                case 2: doc = new RechercheScientifique; break;
+                case 3: doc = new Magazine; break;
+                case 4: doc = new LivreAudio; break;
                 default: cout<<"choix invalide"<<endl; continue;
             }
     doc->saisir();
@@ -68,13 +74,13 @@ void Personne::afficher() {
     cout << "Affichage des informations de la personne:" << endl;
     cout << " Nom: " << nom<< endl;
     cout<< " Prenom: " << prenom << endl;
-    cout<< " Date de naissance: "<<;
+    cout<< " Date de naissance: "<<endl;
     datenaissance.afficher();
     cout<< " Email: " << email<< endl;
     cout<< " Tel: " << tel << endl;
     cout<<" Les documents:"<<endl;
-    for (const Document* doc : documents) {
-            doc->afficher();
+    for (int i=0 ; i<this->documents.size() ; i++) {
+            (this->documents[i])->afficher();
         }
     cout << "Fin affichage" << endl;
 }
@@ -87,14 +93,13 @@ void Personne::set_datenaissance(Date d) { datenaissance = d; }
 
 void Personne::ajouterDoc(Document* doc) { documents.push_back(doc); }
 void Personne::supprimerDoc(string id) {
-    for (size_t i = 0; i < documents.size(); ) {
+    for (int i = 0; i < documents.size(); i++ ) {
         if (documents[i]->get_id() == id) {
             delete documents[i];
-            documents.erase(documents.begin() + i);
             cout<<"document supprimme avec succes"<<endl;
-        } else {
-             i++;
-            }
+            return;
+
+        }
     }
     cout<<"document introuvable !"<<endl;
 

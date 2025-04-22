@@ -36,3 +36,24 @@ string LivreAudio::get_narrateur()
 }
 
 LivreAudio::~LivreAudio(){}
+
+ostream& operator<<(ostream& o,LivreAudio& la)
+{
+    Document* d=&la;
+    o<<*d;
+    Audio* au=&la;
+    o<<*au;
+    o<<"Narrateur: "<<la.narrateur<<endl;
+    return o;
+}
+
+istream& operator>>(istream& i,LivreAudio& la)
+{
+    Document* d=&la;
+    i>>*d;
+    Audio* au=&la;
+    i>>*au;
+    cout<<"Donner le narrateur: ";
+    i>>la.narrateur;
+    return i;
+}

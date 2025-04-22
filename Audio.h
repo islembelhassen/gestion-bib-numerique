@@ -1,5 +1,6 @@
 #ifndef AUDIO_H_INCLUDED
 #define AUDIO_H_INCLUDED
+
 #include<string>
 using namespace std;
 
@@ -15,7 +16,12 @@ public:
     void set_type(string);
     int get_duree();
     string get_type();
+    friend ostream& operator<<(ostream&,Audio&);
+    friend istream& operator>>(istream&,Audio&);
     virtual ~Audio();
-};
+}; ostream& operator<<(ostream&,Audio&);
+   istream& operator>>(istream&,Audio&);
+
+
 
 #endif // AUDIO_H_INCLUDED

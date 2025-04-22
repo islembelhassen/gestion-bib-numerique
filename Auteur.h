@@ -13,7 +13,7 @@ class Auteur : public Personne{
         virtual void saisir();
         virtual void afficher();
         void set_idAut(string);
-        string get_idAut()
+        string get_idAut();
 
 };
 

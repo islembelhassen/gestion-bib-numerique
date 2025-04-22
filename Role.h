@@ -16,7 +16,7 @@ class Role {
         string get_role();
         float get_salaire();
         virtual void afficher();
-        virtual saisir();
+        virtual void saisir();
         virtual ~Role();
 };
 

@@ -4,9 +4,9 @@ Auteur::Auteur():Personne(),idAut(""){}
 
 Auteur::Auteur(string n, string p, Date d, string e, int t, string id):Personne(n,p,d,e,t),idAut(id){}
 
-Auteur::Auteur(const Auteur& a){
-    Personne::Personne(a);
-    idAut=a.idAut;
+Auteur::Auteur(const Auteur& a)
+    :Personne(a){
+        idAut=a.idAut;
 }
 void Auteur::afficher(){
     cout<<"id auteur : "<<idAut<<endl;

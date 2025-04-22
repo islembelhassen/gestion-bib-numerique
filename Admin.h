@@ -3,18 +3,19 @@
 
 #include "Personne.h"
 #include "Role.h"
+#include"Lecteur.h"
 
 class Admin : public Personne , public Role {
     private:
-        DATE date_prise_fct;
+        Date date_prise_fct;
         string idA;
         vector<Lecteur*> lecteurs;
     public:
         Admin(string,string, Date,string,int,string, float,Date,string);
         void set_idA(string);
-        void set_date_prise_fct(DATE);
+        void set_date_prise_fct(Date);
         string get_idA();
-        DATE get_date_prise_fct();
+        Date get_date_prise_fct();
         void ajouterLecteur(Lecteur*);
         void supprimerLecteur(Lecteur*);
         virtual void afficher();

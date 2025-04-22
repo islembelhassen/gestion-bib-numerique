@@ -2,6 +2,9 @@
 #define DATE_H_INCLUDED
 
 #include<iostream>
+#include <string>
+#include <iomanip>
+#include <sstream>
 using namespace std;
 
 class Date {
@@ -21,6 +24,26 @@ class Date {
             cin>> mois;
             cout << " annee: ";
             cin>> annee;
+    }
+
+    string toString()  {
+        ostringstream oss;
+
+        oss << setfill('0')
+                    << setw(2) << jour << "/"
+                    << setw(2) << mois << "/"
+                    << setw(4) << annee;
+        return oss.str();
+    }
+
+    Date parseDate(const string& dateStr) {
+        char sep;
+        int j, m, a;
+
+        if (dateStr.find('/') != string::npos)
+                sscanf(dateStr.c_str(), "%d/%d/%d", &j, &m, &a);
+
+        return Date(j, m, a);
     }
 
 };

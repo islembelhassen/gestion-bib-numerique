@@ -39,3 +39,43 @@ void Role::saisir() {
 Role::~Role() {
     // vide
 }
+
+
+Role& Role::operator=(const Role& r) {
+    if (this != &r) {
+        role = r.role;
+        salaire = r.salaire;
+    }
+    return *this;
+}
+
+ostream& operator<<(ostream& os, const Role& r) {
+    os << "Role: " << r.role << "\n"
+       << "Salaire: " << r.salaire << " €\n";
+    return os;
+}
+
+istream& operator>>(istream& is, Role& r) {
+    cout << "Entrez le role: ";
+    getline(is, r.role);
+    cout << "Entrez le salaire: ";
+    is >> r.salaire;
+    is.ignore();
+    return is;
+}
+
+
+
+ostream& operator<<(ostream& o, const Role* r) {
+    if(r != nullptr) {
+        o << "role: " << r->role << endl<<"salaire: " << r->salaire << endl;
+    }
+    return o;
+}
+
+istream& operator>>(istream& i, Role* r) {
+    i>>r->role;
+    i >> r->salaire;
+
+    return i;
+}

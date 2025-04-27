@@ -1,6 +1,7 @@
 #include"Chapitre.h"
 #include<iostream>
 #include<string>
+#include<iomanip>
 using namespace std;
 
 Chapitre::Chapitre(string titre, int nbrpages)
@@ -58,5 +59,19 @@ istream& operator>>(istream& i,Chapitre& c)
     i>>c.titre;
     cout<<"Donner le nombre de pages du chapitre: ";
     i>>c.nbrpages;
+    return i;
+}
+
+ostream& operator<<(ostream& o, Chapitre* c)
+{
+    o<<"Titre: "<<c->titre<<endl;
+    o<<"Nombre de pages: "<<c->nbrpages<<endl;
+    return o;
+}
+
+istream& operator>>(istream& i,Chapitre* c)
+{
+    i>>c->titre;
+    i>>c->nbrpages;
     return i;
 }

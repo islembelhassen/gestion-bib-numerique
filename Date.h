@@ -14,37 +14,22 @@ class Date {
         int annee;
         Date(): jour(0), mois(0), annee(0000) {}
         Date(int j, int m, int a) : jour(j), mois(m), annee(a) {}
-        void afficher(){
-            cout << jour << "/" << mois << "/" << annee << endl;
-        }
-        void saisir(){
-            cout << " jour: ";
-            cin>>jour;
-            cout<< " mois: " ;
-            cin>> mois;
-            cout << " annee: ";
-            cin>> annee;
-    }
 
-    string toString()  {
-        ostringstream oss;
+        void afficher();
+        void saisir();
 
-        oss << setfill('0')
-                    << setw(2) << jour << "/"
-                    << setw(2) << mois << "/"
-                    << setw(4) << annee;
-        return oss.str();
-    }
+        string toString();
 
-    Date parseDate(const string& dateStr) {
-        char sep;
-        int j, m, a;
+        Date parseDate(const string&);
 
-        if (dateStr.find('/') != string::npos)
-                sscanf(dateStr.c_str(), "%d/%d/%d", &j, &m, &a);
 
-        return Date(j, m, a);
-    }
+        Date& operator=(const Date&);
+        Date& operator+(const Date&);
+
+        friend ostream& operator<<(ostream&, const Date&);
+        friend istream& operator>>(istream&, Date&);
+
+
 
 };
 #endif // DATE_H_INCLUDED

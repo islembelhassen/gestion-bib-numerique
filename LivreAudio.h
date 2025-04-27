@@ -9,12 +9,13 @@ using namespace std;
 class LivreAudio: public Document, public Audio{
 string narrateur;
 public:
-    LivreAudio(string="",string="",float=0/*,Date,Auteur* */,int=0,string="",string="");
-    virtual void saisir();
-    virtual void afficher();
+    LivreAudio(string="",string="",float=0,Date=Date(),int=0,string="",string="");
+    virtual void saisir()override;
+    virtual void afficher()override;
     void set_narrateur(string);
     string get_narrateur();
     friend ostream& operator<<(ostream&,LivreAudio&);
+    friend ostream& operator<<(ostream&,LivreAudio*);
     friend istream& operator>>(istream&,LivreAudio&);
     virtual ~LivreAudio();
 }; ostream& operator<<(ostream&,LivreAudio&);

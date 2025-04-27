@@ -13,7 +13,8 @@ class Lecteur : public Personne {
     public:
         Lecteur();
         Lecteur(string, string, Date, string, int, string, Date, int);
-        void acheter_doc(string);
+        Lecteur(const Lecteur&);
+        void acheter_doc();
         void set_idLec(string);
         void set_date_adhes(Date);
         void set_nbrdoc(int);
@@ -23,6 +24,14 @@ class Lecteur : public Personne {
         virtual void afficher();
         virtual void saisir();
         virtual ~Lecteur();
+
+        Lecteur& operator=(const Lecteur&);
+        friend ostream& operator<<(ostream&, const Lecteur&);
+        friend istream& operator>>(istream&, Lecteur&);
+
+
+        friend ostream& operator<<(ostream&, const Lecteur*);
+        friend istream& operator>>(istream&, Lecteur*);
 };
 
 #endif // LECTEUR_H_INCLUDED

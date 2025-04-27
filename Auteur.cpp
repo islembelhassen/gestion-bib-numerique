@@ -26,3 +26,26 @@ void Auteur::set_idAut(string id){
 string Auteur::get_idAut(){
     return idAut;
 }
+
+Auteur& Auteur::operator=(const Auteur& auteur) {
+    if (this != &auteur) {
+        Personne::operator=(auteur);
+        idAut = auteur.idAut;
+    }
+    return *this;
+}
+
+ostream& operator<<(ostream& os, const Auteur& auteur) {
+    os << static_cast<const Personne&>(auteur)
+       << "ID Auteur: " << auteur.idAut <<endl;
+    return os;
+}
+
+istream& operator>>(istream& is, Auteur& auteur) {
+    is >> static_cast<Personne&>(auteur);
+
+    cout << "Entrez l'ID auteur: ";
+    is >> auteur.idAut;
+
+    return is;
+}

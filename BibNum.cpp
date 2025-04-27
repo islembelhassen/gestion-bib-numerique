@@ -127,7 +127,8 @@ void BibNum::supprimer_doc(string id)
         if(documents[i]->get_id()==id)
     {
         delete documents[i];
-        cout<<"Suppression effetuee avec succés"<<endl;
+        documents.erase(documents.begin() + i);
+        cout<<"Suppression effetuee avec succes"<<endl;
         nbrdoc--;
     }
 }
@@ -150,10 +151,34 @@ ostream& operator<<(ostream& o,BibNum& b)
 
 ostream& operator<<(ostream& o,BibNum* b)
 {
-    o<<setw(10)<<b->nom<<endl;
-    o<<setw(10)<<b->nbrdoc<<endl;
+    o<<"Nom: "<<setw(10)<<b->nom<<endl;
+    o<<"Nombre de documents: "<<b->nbrdoc<<endl;
     for(int i=0;i<b->nbrdoc;i++)
-        o<<setw(50)<<b->documents[i]<<endl;
+        {
+            if(typeid(*b->documents[i])==typeid(Livre))
+               {
+                   o<<"1. Livre:"<<endl;
+                   o<<static_cast<Livre&>(*b->documents[i])<<endl;
+               }
+            else
+                if(typeid(*b->documents[i])==typeid(Magazine))
+                {
+                    o<<"3. Magazine:"<<endl;
+                    o<<static_cast<Magazine&>(*b->documents[i])<<endl;
+                }
+                else
+                    if(typeid(*b->documents[i])==typeid(LivreAudio))
+                    {
+                        o<<"2. Livre Audio:"<<endl;
+                        o<<static_cast<LivreAudio&>(*b->documents[i])<<endl;
+                    }
+                    else
+                        if(typeid(*b->documents[i])==typeid(RechercheScientifique))
+                        {
+                            o<<"4. Recherche Scientifique:"<<endl;
+                            o<<static_cast<RechercheScientifique&>(*b->documents[i]);
+                        }
+        }
     return o;
 }
 
@@ -209,6 +234,8 @@ BibNum& BibNum::operator=(const BibNum&b)
                         if(typeid(b.documents[i])==typeid(RechercheScientifique))
                             d=new RechercheScientifique(static_cast<const RechercheScientifique&>(*b.documents[i]));
         documents.push_back(d);
+        this->nom=b.nom;
+        this->nbrdoc=b.nbrdoc;
         }
     }
     return *this;
@@ -216,16 +243,78 @@ BibNum& BibNum::operator=(const BibNum&b)
 
 void BibNum::ouvrir_fichier(fstream& f)
 {
-    f.open("C:\\Users\\Ons\\Desktop\\enicar\\1ère année\\semestre 2\\Programmation orienté objet\\projet vf\\ficherbib.txt",ios::in|ios::out|ios::trunc);
-    if(!f.is_open()) exit(-1);
+    f.open("C:\\Users\\Ons\\Desktop\\enicar\\1ère année\\semestre 2\\Programmation orienté objet\\projet vf - Copie\\ficherbib.txt",ios::in|ios::out|ios::trunc);
+    if(!f.is_open()) throw -1;
 }
 
-void BibNum::saisir_dans_fichier(fstream& f)
+istream& operator>>(istream& i,BibNum* b)
 {
-
+    int choix;
+    i.seekg(0);
+    while(1)
+    {
+        /*i.getline(ch,100);
+        if(i.eof()) break;
+        i>>ch>>endl;*/
+        i>>choix;
+        if(i.eof()) break;
+        if(choix==1)
+        {
+            Livre* l=new Livre();
+            i>>*l;
+            b->documents.push_back(l);
+        }
+        else if(choix==2)
+        {
+            Magazine* m=new Magazine();
+            i>>*m;
+            b->documents.push_back(m);
+        }
+        else if(choix==3)
+        {
+            LivreAudio* la=new LivreAudio();
+            i>>*la;
+            b->documents.push_back(la);
+        }
+        else if (choix==4)
+        {
+            RechercheScientifique* rs=new RechercheScientifique();
+            i>>*rs;
+            b->documents.push_back(rs);
+        }
+    }
+    return i;
 }
 
-void BibNum::afficher_du_fichier(fstream& f)
+
+void BibNum::ecriture_fichier(fstream& f)
 {
+        BibNum b1;
+
+        b1.ouvrir_fichier(f);
+        cout<<"--------------Remplissage du fichier----------------"<<endl;
+        cin>>b1;
+        f<<&b1<<endl;
+}
+
+
+
+void BibNum::lecture_fichier(fstream& f)
+{
+        BibNum b1;
+
+        cout<<"--------------Lecture du fichier--------------------"<<endl;
+        f.seekg(0);
+        char str[100];
+        while(1)
+        {
+        f.getline(str,100,'\n');
+        if(f.eof()) break;
+        cout<<str<<endl;
+        }
+        f.close();
+        cout<<"------------Fin de lecture du fichier----------------"<<endl;
 
 }
+
+

@@ -15,6 +15,9 @@ class Auteur : public Personne{
         void set_idAut(string);
         string get_idAut();
 
+        Auteur& operator=(const Auteur&);
+        friend ostream& operator<<(ostream&, const Auteur&);
+        friend istream& operator>>(istream&, Auteur&);
 };
 
 #endif // AUTEUR_H_INCLUDED

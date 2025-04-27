@@ -13,11 +13,11 @@ using namespace std;
 class Livre: public Document{
 string ISBN;
 int nbrchaps;
-vector<Chapitre*> chaps;
+vector<Chapitre*>chaps;
 public:
-    Livre(string="",string="",float=0/*,Date,Auteur* */,string="",int=0);
+    Livre(string="",string="",float=0,Date=Date(),string="",int=0);
     Livre(const Livre&);
-    void saisir();
+    void saisir()override;
     void afficher();
     void ajouter_chap();
     void supprimer_chap(string);
@@ -28,7 +28,11 @@ public:
     friend ostream& operator<<(ostream&,Livre&);
     friend ostream& operator<<(ostream&,Livre*);
     friend istream& operator>>(istream&,Livre&);
+    friend istream& operator>>(istream&,Livre*);
     Livre& operator=(Livre&);
+    void ouvrir_fichier(fstream&);
+    void ecriture_fichier(fstream&);
+    void lecture_fichier(fstream&);
     ~Livre();
 }; ostream& operator<<(ostream&,Livre&);
    istream& operator>>(istream&,Livre&);

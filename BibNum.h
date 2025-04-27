@@ -7,6 +7,7 @@
 #include<fstream>
 using namespace std;
 
+typedef int Erreur;
 class BibNum{
 string nom;
 int nbrdoc;
@@ -28,11 +29,13 @@ public:
     friend istream& operator>>(istream&,BibNum*);
     BibNum& operator=(const BibNum&);
     void ouvrir_fichier(fstream&);
-    void saisir_dans_fichier(fstream&);
-    void afficher_du_fichier(fstream&);
+    void ecriture_fichier(fstream&);
+    void lecture_fichier(fstream&);
     ~BibNum();
 }; ostream& operator<<(ostream&,BibNum&);
    istream& operator>>(istream&,BibNum&);
+   ostream& operator<<(ostream&,BibNum*);
+   istream& operator>>(istream&,BibNum*);
 
 
 #endif // BIBNUM_H_INCLUDED

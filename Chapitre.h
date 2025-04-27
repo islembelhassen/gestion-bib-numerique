@@ -16,10 +16,13 @@ public:
     string get_titre();
     int get_nbrpages();
     friend ostream& operator<<(ostream&,Chapitre&);
+    friend ostream& operator<<(ostream&,Chapitre*);
     friend istream& operator>>(istream&,Chapitre&);
+    friend istream& operator>>(istream&,Chapitre*);
     ~Chapitre();
 }; ostream& operator<<(ostream&,Chapitre&);
    istream& operator>>(istream&,Chapitre&);
-
+   ostream& operator<<(ostream&,Chapitre*);
+   istream& operator>>(istream&,Chapitre*);
 
 #endif // CHAPITRE_H_INCLUDED

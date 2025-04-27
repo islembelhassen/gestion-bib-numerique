@@ -35,9 +35,9 @@ void Admin::ajouterLecteur(Lecteur* lecteur) {
     }
 }
 
-void Admin::supprimerLecteur(Lecteur* lecteur) {
+void Admin::supprimerLecteur(string idLec) {
     for (auto it = lecteurs.begin(); it != lecteurs.end(); ++it) {
-        if (*it == lecteur) {
+        if ((*it)->get_idLec()==idLec) {
             lecteurs.erase(it);
             cout << "Lecteur supprimé avec succès." << endl;
             return;
@@ -69,12 +69,13 @@ void Admin::afficher() {
 
 
 void Admin::saisir() {
-    cout << "\nSaisie des informations administrateur:" << endl;
+    cout << "Saisie des informations administrateur:" << endl;
+    Personne::saisir();
+    Role::saisir();
     cout << "ID Admin: ";
     cin >> idA;
 
-    Personne::saisir();
-    Role::saisir();
+
 
     cout << "Date de prise de fonction: " << endl;
     date_prise_fct.saisir();
@@ -104,68 +105,158 @@ Admin::~Admin() {
 
 
 
-/////////////////////////////////////////////////////////////////////////////////////////////////////
+Admin& Admin::operator=(const Admin& a){
+    if(this!=&a){
+
+        Personne::operator=(a);
+        Role::operator=(a);
+        this->idA=a.idA;
+        this->date_prise_fct=a.date_prise_fct;
+        for (Lecteur* lecteur : this->lecteurs) {
+            delete lecteur;
+        }
 
 
-void Admin::ecrireDansFichier(char file[20])  {
+        this->lecteurs.clear();
+        for (Lecteur* lecteur : a.lecteurs){
+            (this->lecteurs).push_back(new Lecteur(*lecteur));
+        }
 
-    ofstream fout(file);
-    if (!fout) {
-        cout << "Impossible d'ouvrir " << file << endl;
-        return;
     }
+    return *this;
 
-
-    fout << "=== Donnees Administrateur ===" << endl;
-    fout << "ID Admin: " << idA << endl;
-    fout << "Date prise de fonction: " << date_prise_fct.toString() << endl;
-
-    fout << "Nom: " << getNom() << endl;
-    fout << "Prenom: " << getPrenom() << endl;
-    fout << "Email: " << getEmail() << endl;
-
-
-    fout.close();
-    cout << "Donnees enregistrees dans " << file << endl;
 }
 
-void Admin::lireDepuisFichier( char file[20]) {
+ostream& operator<<(ostream& o,const Admin& admin){
+    o << static_cast<const Personne&>(admin);
+    o << static_cast<const Role&>(admin);
 
-    ifstream fin(file);
-    if (!fin) {
-        cout << "Impossible d'ouvrir " << file << " en lecture" << endl;
-        return;
+
+    o << "ID Admin: " << admin.idA << endl
+       << "Date prise de fonction: " << admin.date_prise_fct <<endl
+       << "Lecteurs:"<<endl;
+
+    for (const Lecteur* lecteur : admin.lecteurs) {
+        o<< "  - " << *lecteur<< endl;
     }
 
-    cout << "\nContenu du fichier " << file << ":\n";
-    cout << "----------------------------------------\n";
+    return o;
 
-    string ligne;
-    while (getline(fin, ligne)) {
-        if (ligne.find("ID Admin: ") != string::npos) {
-            idA = ligne.substr(10); // Extrait tout après "ID Admin: "
-        }
-        else if (ligne.find("Date prise de fonction: ") != string::npos) {
-            string dateStr = ligne.substr(23);
-            // Convertir dateStr en objet Date (à implémenter)
-            date_prise_fct = parseDate(dateStr);
-        }
-        else if (ligne.find("Nom: ") != string::npos) {
-            setNom(ligne.substr(5)); // Méthode héritée de Personne
-        }
-        else if (ligne.find("Prenom: ") != string::npos) {
-            setPrenom(ligne.substr(8));
-        }
-        else if (ligne.find("Email: ") != string::npos) {
-            setEmail(ligne.substr(7));
-        }
+}
+istream& operator>>(istream& is,Admin& admin){
+    is >> static_cast<Personne&>(admin);
+    is >> static_cast<Role&>(admin);
 
-        cout << ligne << endl; // Affichage du contenu
+
+    cout << "Entrez l'ID admin: ";
+    is >> admin.idA;
+
+    cout << "Entrez la date de prise de fonction: ";
+    is >> admin.date_prise_fct;
+
+
+    for (Lecteur* lecteur : admin.lecteurs) {
+        delete lecteur;
     }
+    admin.lecteurs.clear();
 
-    fin.close();
-    cout << "----------------------------------------\n";
-    cout << "Données admin chargées avec succès!\n";
+
+    char continuer;
+    do {
+        cout << "Ajouter un lecteur: ";
+
+        Lecteur* lecteur = new Lecteur();
+        is >> *lecteur;
+        admin.lecteurs.push_back(lecteur);
+
+        cout << "Ajouter un autre lecteur? (O/N): ";
+        is >> continuer;
+
+    } while (toupper(continuer) == 'O');
+
+    return is;
 }
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+void Admin::ouvrir_fichier(fstream& f) {
+    f.open("admin.txt", ios::in | ios::out | ios::trunc);
+    if (!f.is_open())
+                        throw -1;
+
+}
+
+void Admin::fermer_fichier(fstream& f) {
+    f.close();
+
+}
+
+
+
+
+
+
+ostream& operator<<(ostream& o, const Admin* a) {
+
+    o << static_cast<const Personne*>(a);
+
+    o << static_cast<const Role*>(a);
+
+
+    o << "id: "<< a->idA << endl<<a->date_prise_fct
+      <<"nombre lecteurs:"<< a->lecteurs.size() << endl;
+
+    for(const Lecteur* lect : a->lecteurs) {
+        o << *lect << endl;
+    }
+    return o;
+}
+
+istream& operator>>(istream& i, Admin* a) {
+
+    i >> static_cast<Personne*>(a);
+/*
+    i >> static_cast<Role*>(a);
+
+    i >> a->date_prise_fct;
+    getline(i >> ws, a->idA);
+
+    int nbLecteurs;
+    i >> nbLecteurs;
+    for(int j = 0; j < nbLecteurs; j++) {
+        Lecteur* l = new Lecteur();
+        i >> *l;
+        a->lecteurs.push_back(l);
+    }*/
+    return i;
+}
+
+void Admin::ecriture_fichier(fstream& f) {
+    cout << "----- ecriture Admin dans fichier -----" << endl;
+    f << this << endl;
+    cout<<"----- Fin ecriture Admin dans fichier -----"<<endl;
+}
+
+void Admin::lecture_fichier(fstream& f) {
+    cout << "----- Lecture Admin depuis fichier -----" << endl;
+    f.seekg(0);
+    char str[100];
+        while(1)
+        {
+        f.getline(str,100,'\n');
+        if(f.eof()) break;
+        cout<<str<<endl;
+        }
+    cout << "----- Fin Lecture Admin depuis fichier -----" << endl;
+}

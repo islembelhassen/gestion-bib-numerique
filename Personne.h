@@ -6,6 +6,8 @@
 #include <vector>
 #include "Document.h"
 #include "Date.h"
+#include<fstream>
+
 using namespace std;
 
 class Personne {
@@ -36,6 +38,15 @@ class Personne {
         void ajouterDoc(Document*);
         void supprimerDoc(string id);
         virtual ~Personne();
+
+        Personne& operator=(const Personne&);
+        friend ostream& operator<<(ostream&, const Personne&);
+        friend istream& operator>>(istream&, Personne&);
+
+        friend ostream& operator<<(ostream&, const Personne*);
+        friend istream& operator>>(istream&, Personne*);
+        void ecriture_fichier(fstream&);
+        void lecture_fichier(fstream&);
 };
 
 

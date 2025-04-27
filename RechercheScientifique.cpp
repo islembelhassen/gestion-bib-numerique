@@ -2,10 +2,11 @@
 #include<string>
 #include "Document.h"
 #include"RechercheScientifique.h"
+#include<iomanip>
 using namespace std;
 
 
-RechercheScientifique::RechercheScientifique(string id,string titre,float prix,string institut):Document(id,titre,prix)
+RechercheScientifique::RechercheScientifique(string id,string titre,float prix,Date datepub,string institut):Document(id,titre,prix,datepub)
 {
     this->institut=institut;
 }
@@ -50,4 +51,12 @@ istream& operator>>(istream& i,RechercheScientifique& r)
     cout<<"Donner l'institut: ";
     i>>r.institut;
     return i;
+}
+
+ostream& operator<<(ostream& o,RechercheScientifique* rs)
+{
+    Document* d=rs;
+    o<<*d;
+    o<<setw(10)<<rs->institut<<endl;
+    return o;
 }

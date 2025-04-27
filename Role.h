@@ -18,6 +18,13 @@ class Role {
         virtual void afficher();
         virtual void saisir();
         virtual ~Role();
+
+        Role& operator=(const Role&);
+        friend ostream& operator<<(ostream&, const Role&);
+        friend istream& operator>>(istream&, Role&);
+
+        friend ostream& operator<<(ostream&, const Role*);
+        friend istream& operator>>(istream&, Role*);
 };
 
 

@@ -3,9 +3,10 @@
 #include"Document.h"
 #include"Audio.h"
 #include"LivreAudio.h"
+#include<iomanip>
 using namespace std;
 
-LivreAudio::LivreAudio(string id, string titre, float prix,int duree,string type,string narrateur):Document(id,titre,prix),Audio(duree,type)
+LivreAudio::LivreAudio(string id, string titre, float prix,Date datepub,int duree,string type,string narrateur):Document(id,titre,prix,datepub),Audio(duree,type)
 {
     this->narrateur=narrateur;
 }
@@ -56,4 +57,17 @@ istream& operator>>(istream& i,LivreAudio& la)
     cout<<"Donner le narrateur: ";
     i>>la.narrateur;
     return i;
+}
+
+ostream& operator<<(ostream& o, LivreAudio* la)
+{
+    o<<"ID: "<<setw(10)<<la->id<<endl;
+    o<<"Titre: "<<setw(10)<<la->titre<<endl;
+    o<<"Prix: "<<setw(10)<<la->prix<<endl;
+    o<<"Date de publication: "<<setw(10)<<la->datepub<<endl;
+    for(int i=0;i<la->description.size();i++)
+        o<<la->description[i]<<endl;
+    o<<setw(10)<<la->type<<endl;
+    o<<setw(10)<<la->duree<<endl;
+    return o;
 }

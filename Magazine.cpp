@@ -6,7 +6,7 @@
 #include<iomanip>
 using namespace std;
 
-Magazine::Magazine(string id,string titre,float prix,string edition):Document(id,titre,prix)
+Magazine::Magazine(string id,string titre,float prix,Date datepub,string edition):Document(id,titre,prix,datepub)
 {
     this->edition=edition;
 }
@@ -55,9 +55,16 @@ istream& operator>>(istream& i,Magazine& m)
 
 ostream& operator<<(ostream& o,Magazine* m)
 {
-    o<<"Id: "<<setw(10)<<m->id<<endl;
-    o<<"Titre: "<<setw(10)<<m->titre<<endl;
-    o<<"Prix: "<<setw(10)<<m->prix<<endl;
+    Document* d=m;
+    o<<*d;
     o<<"Edition: "<<setw(10)<<m->edition<<endl;
     return o;
+}
+
+istream& operator>>(istream& i, Magazine* m)
+{
+    Document* d=m;
+    i>>*d;
+    i>>m->edition;
+    return i;
 }

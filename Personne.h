@@ -23,7 +23,7 @@ class Personne {
         Personne(string,string, Date,string,int);
         Personne(const Personne&);
         virtual void saisir()=0;
-        virtual void afficher();
+        virtual void afficher()=0;
         void set_nom(string);
         void set_prenom(string);
         void set_email(string);

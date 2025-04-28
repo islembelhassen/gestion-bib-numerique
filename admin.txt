@@ -9,6 +9,7 @@ ID: 1
 Titre: 1
 Prix: 1
 Date de publication: 1/1/1
+
 Description: 
 Libelle: 1
 Categorie: 1
@@ -21,5 +22,29 @@ role: 1
 salaire: 1
 id: 1
 1/1/1
-nombre lecteurs:0
+nombre lecteurs:1
+Nom: 1
+Prenom: 1
+Email: 1
+Telephone: 1
+Date naissance: 1/1/1
+1
+1
+ID: 1
+Titre: 1
+Prix: 1
+Date de publication: 1/1/1
+
+Description: 
+Libelle: 1
+Categorie: 1
+Langue: 1
+ISBN: 1
+Nombre de chapitres: 1
+Titre: 1
+Nombre de pages: 1
+ID Lecteur: 1
+Date adhesion: 1/1/1
+nombre des documents: 1
+
 

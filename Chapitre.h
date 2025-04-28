@@ -15,6 +15,7 @@ public:
     void set_nbrpages(int);
     string get_titre();
     int get_nbrpages();
+    Chapitre& operator+(const Chapitre&);
     friend ostream& operator<<(ostream&,Chapitre&);
     friend ostream& operator<<(ostream&,Chapitre*);
     friend istream& operator>>(istream&,Chapitre&);

@@ -14,6 +14,7 @@ public:
     virtual void afficher()override;
     void set_edition(string);
     string get_edition();
+    bool operator==(const Magazine&)const;
     friend ostream& operator<<(ostream&,Magazine&);
     friend ostream& operator<<(ostream&,Magazine*);
     friend istream& operator>>(istream&,Magazine&);

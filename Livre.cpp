@@ -193,7 +193,7 @@ istream& operator>>(istream& i,Livre*l)
 
 void Livre::ouvrir_fichier(fstream& f)
 {
-    f.open("C:\\Users\\Ons\\Desktop\\enicar\\1ère année\\semestre 2\\Programmation orienté objet\\projet vf - Copie\\ficherlivre.txt",ios::in|ios::out|ios::trunc);
+    f.open("ficherlivre.txt",ios::in|ios::out|ios::trunc);
     if(!f.is_open()) exit(-2);
 }
 

@@ -1,0 +1,18 @@
+Nom:          1
+Nombre de documents: 1
+1. Livre:
+ID: 1
+Titre: 1
+Prix: 1
+Date de publication: 1/1/1
+
+Description: 
+Libelle: 1
+Categorie: 1
+Langue: 1
+ISBN: 1
+Nombre de chapitres: 1
+Titre: 1
+Nombre de pages: 1
+
+

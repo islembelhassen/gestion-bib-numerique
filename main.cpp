@@ -1,31 +1,162 @@
-#include <iostream>
-#include<string.h>
+#include<iostream>
+#include<string>
+#include<vector>
 #include<map>
-#include<limits>
 #include<typeinfo>
 #include<fstream>
-
+#include<algorithm>
+#include"BibNum.h"
 #include"Document.h"
 #include"Livre.h"
-#include"LivreAudio.h"
 #include"Magazine.h"
 #include"RechercheScientifique.h"
-#include "Admin.h"
-#include "Lecteur.h"
-#include"BibNum.h"
-#include"Licence.h"
+#include"LivreAudio.h"
+#include"Chapitre.h"
 #include"SerieLivres.h"
-
+#include<limits>
+#include"Date.h"
+#include"Personne.h"
+#include"Lecteur.h"
+#include"Admin.h"
+#include"Role.h"
+#include"Licence.h"
+#include"SerieMagazines.h"
 using namespace std;
 
-void menu(){
-    cout<<"------------------------- MENU -------------------------"<<endl;
-    cout<<"Choisir l'une des options suivantes:"<<endl;
-    cout<<"1. Gestion des documents de la bibliotheque numerique"<<endl;
-    cout<<"2. Gestion des personnes"<<endl;
-    cout<<"3. Gestion des licences"<<endl;
-    cout<<"4. Quitter"<<endl;
-    cout<<"Votre choix : "<<endl;
+void gestionDocuments()
+{
+    BibNum b;
+    cout<<"------------------------- 1.Gestion des documents -------------------------"<<endl;
+    cout<<"------------Remplissage des donnees de la bibliotheque------------"<<endl;
+    cin>>b;
+    cout<<"------------Affichage des donnees de la bibliotheque--------------"<<endl;
+    cout<<b;
+    cout<<"-----------------------------------------------"<<endl;
+    char rep;
+    cout<<"Voulez-vous ajouter un document? ";
+    cin>>rep;
+    if(rep=='o'||rep=='O')
+    {
+        do
+            {
+                b.ajouter_doc();
+                cout<<"Document ajoute!"<<endl;
+                cout<<"Voulez-vous ajouter un autre document? ";
+                cin>>rep;
+            }while(rep=='o'||rep=='O');
+    }
+    cout<<"----Affichage des donnees de la bibliotheque apres ajout des documents-----"<<endl;
+    cout<<b;
+    cout<<"-----------------------------------------------"<<endl;
+    cout<<"Voulez-vous supprimer un document? ";
+    cin>>rep;
+    if(rep=='o'||rep=='O')
+    {
+        do
+            {
+                string id;
+                cout<<"Donner l'id du document a supprimer ";
+                cin>>id;
+                b.supprimer_doc(id);
+                cout<<"Voulez-vous supprimer un autre document? ";
+                cin>>rep;
+            }while(rep=='o'||rep=='O');
+    }
+    cout<<"----Affichage des donnees de la bibliotheque apres suppression des documents-----"<<endl;
+    cout<<b;
+    cout<<"-----------------------------------------------"<<endl;
+    cout<<"Voulez-vous enregistrer les donnees d'une bibliotheque dans un fichier? ";
+    cin>>rep;
+    if(rep=='o'||rep=='O')
+    {
+        BibNum b1;
+        fstream f;
+
+        b1.ecriture_fichier(f);
+        b1.lecture_fichier(f);
+    }
+    cout<<"-----------------------------------------------"<<endl;
+    cout<<"Voulez-vous enregistrer les donnees d'un livre dans un fichier? ";
+    cin>>rep;
+    if(rep=='o'||rep=='O')
+    {
+        Livre l;
+        fstream f;
+        try{
+        l.ecriture_fichier(f);
+        l.lecture_fichier(f);}
+        catch(Erreur)
+        {
+            cerr<<"Ouverture echouee"<<endl;
+        }
+    }
+    cout<<"------------------------------------------------"<<endl;
+    cout<<"Voulez-vous saisir une serie de livres? ";
+    cin>>rep;
+    if(rep=='o'||rep=='O')
+    {
+        SerieLivres s;
+        cout<<"--------------Saisie d'une serie de livres-----------------"<<endl;
+        s.saisir();
+        cout<<"--------------Affichage d'une serie de livres--------------"<<endl;
+        s.afficher();
+        cout<<"------------------------------------------------"<<endl;
+        cout<<"Voulez-vous chercher un livre dans la serie? ";
+        char rep1;
+        cin>>rep1;
+        if(rep1=='O'||rep1=='o')
+        {
+            cout<<"Donner l'id du livre que vous cherchez: ";
+            string id;
+            cin>>id;
+            s.rechercher_par_id(id);
+        }
+    }
+    cout<<"------------------------------------------------"<<endl;
+    cout<<"Voulez-vous saisir une serie de magazines? ";
+    cin>>rep;
+    if(rep=='o'||rep=='O')
+    {
+        SerieMagazines sm;
+        cout<<"--------------Saisie d'une serie de magazines-----------------"<<endl;
+        sm.saisir();
+        cout<<"--------------Affichage d'une serie de magazines--------------"<<endl;
+        sm.afficher();
+        cout<<"------------------------------------------------"<<endl;
+        sm.compter_magazines();
+        cout<<endl;
+        sm.ajouter_magazine();
+        sm.afficher();
+        sm.compter_magazines();
+        cout<<endl;
+        string t;
+        cout<<"Donner l'id du magazine a supprimer: ";
+        cin>>t;
+        sm.supprimer_magazine(t);
+        sm.afficher();
+        sm.compter_magazines();
+        cout<<endl;
+    }
+    cout<<"------------------------------------------------"<<endl;
+    cout<<"Voulez-vous concatener deux chapitres? ";
+    cin>>rep;
+    if(rep=='o'||rep=='O')
+    {
+        Chapitre c1,c2;
+        cout<<"Saisie du chapitre 1"<<endl;
+        cin>>c1;
+        cout<<"Saisie du chapitre 2"<<endl;
+        cin>>c2;
+        cout<<"Chapitre 1: "<<endl;
+        cout<<c1;
+        cout<<endl;
+        cout<<"Chapitre 2: "<<endl;
+        cout<<c2;
+        cout<<endl;
+        cout<<"Chapitre 3(concatenation des chapitres 1 et 2): "<<endl;
+        cout<<c1+c2;
+        cout<<endl;
+    }
 
 }
 
@@ -37,7 +168,9 @@ void gestionLicenses(map<int,Licence>& mesLicenses){
         cout<<"Veuillez selectionner une option parmi les suivantes :"<<endl;
         cout<<" 1.Ajouter licenses"<<endl;
         cout<<" 2.Supprimer licenses"<<endl;
-        cout<<" 3.quitter"<<endl;
+        cout<<" 3.afficher les licenses"<<endl;
+        cout<<" 4.rechercher une licence"<<endl;
+        cout<<" 5.quitter"<<endl;
         cout<<"Votre choix : "<<endl;
         cin>>choix;
         switch(choix){
@@ -48,7 +181,7 @@ void gestionLicenses(map<int,Licence>& mesLicenses){
                         licence.saisir();
                         mesLicenses.emplace(licence.get_numL(), licence);
 
-                        cout << "Ajouter un autre licence? (o/n): ";
+                        cout << "Ajouter une autre licence? (o/n): ";
                         cin >> flag;
                     }while (tolower(flag) == 'o');
                   break;
@@ -58,24 +191,53 @@ void gestionLicenses(map<int,Licence>& mesLicenses){
 
                       int numl;
                       do{
-                        cout<<"donner numéro licence a supprimer: ";
+                        cout<<"donner numero licence a supprimer: ";
                         cin>>numl;
 
                         mesLicenses.erase(numl);
 
-                        cout << "supprimer un autre licence? (o/n): ";
+                        cout << "supprimer une autre licence? (o/n): ";
                         cin >> flag;
                     }while (tolower(flag) == 'o');
                   break;
                 }
-            case 3 : cout<<"quitter......"<<endl; break;
+            case 3:{
+                cout<<"map de licenses ordonnée: "<<endl;
+                map<int,Licence>::iterator it;
+                for(it=mesLicenses.begin();it!=mesLicenses.end();it++) {
+                    cout<<it->first;
+                    (it->second).afficher();
+                }
+                break;
+
+            }
+            case 4: {
+                int id;
+                cout << "Donner l'ID de la licence: ";
+                cin >> id;
+
+                auto it = find_if(mesLicenses.begin(), mesLicenses.end(),
+                    [&id](auto& pair) {
+                        return pair.second.get_numL() == id;});
+
+                if (it != mesLicenses.end()) {
+                    cout << "Licence trouvee: ";
+                    it->second.afficher();
+                }
+                else {
+                    cout << "Licence non trouvee" << endl;
+                }
+                break;
+            }
+            case 5 : cout<<"quitter......"<<endl; break;
             default: cout<<"choix invalide !!"<<endl; break;
 
         }
 
-    }while(choix!=3);
+    }while(choix!=5);
 
 }
+
 
 
 void gestionPersonnes(Admin& a){
@@ -94,7 +256,7 @@ void gestionPersonnes(Admin& a){
             case 1 :{
                  if(a.get_idA()=="") a.saisir();
 
-                 cout<<"Ajouter des nouvelles documents ? (o/n):"<<endl;
+                 cout<<"Ajouter des nouveaux documents ? (o/n):"<<endl;
                  cin>>flag;
                          while (tolower(flag) == 'o') {
                                 cout<<"  choisir type document: "<<endl;
@@ -190,131 +352,44 @@ void gestionPersonnes(Admin& a){
 
                 break;
             }
-            case 4 : cout<<"quitter......"<<endl;
-            default: cout<<"choix invalide !!"<<endl; break;
-        }
-
-    }while(choix!=3);
-
-
-}
-
-void gestionDocuments()
-{
-    BibNum b;
-    cout<<"------------Remplissage des donnees de la bibliotheque------------"<<endl;
-    cin>>b;
-    cout<<"------------Affichage des donnees de la bibliotheque--------------"<<endl;
-    cout<<b;
-    cout<<"-----------------------------------------------"<<endl;
-    char rep;
-    cout<<"Voulez-vous ajouter un document? ";
-    cin>>rep;
-    if(rep=='o'||rep=='O')
-    {
-        do
-            {
-                b.ajouter_doc();
-                cout<<"Document ajoute!"<<endl;
-                cout<<"Voulez-vous ajouter un autre document? ";
-                cin>>rep;
-            }while(rep=='o'||rep=='O');
-    }
-    cout<<"----Affichage des donnees de la bibliotheque apres ajout des documents-----"<<endl;
-    cout<<b;
-    cout<<"-----------------------------------------------"<<endl;
-    cout<<"Voulez-vous supprimer un document? ";
-    cin>>rep;
-    if(rep=='o'||rep=='O')
-    {
-        do
-            {
-                string id;
-                cout<<"Donner l'id du document a supprimer ";
-                cin>>id;
-                b.supprimer_doc(id);
-                cout<<"Voulez-vous supprimer un autre document? ";
-                cin>>rep;
-            }while(rep=='o'||rep=='O');
-    }
-    cout<<"----Affichage des donnees de la bibliotheque apres suppression des documents-----"<<endl;
-    cout<<b;
-    cout<<"-----------------------------------------------"<<endl;
-    cout<<"Voulez-vous enregistrer les donnees d'une bibliotheque dans un fichier? ";
-    cin>>rep;
-    if(rep=='o'||rep=='O')
-    {
-        BibNum b1;
-        fstream f;
-
-        b1.ecriture_fichier(f);
-        b1.lecture_fichier(f);
-    }
-    cout<<"-----------------------------------------------"<<endl;
-    cout<<"Voulez-vous enregistrer les donnees d'un livre dans un fichier? ";
-    cin>>rep;
-    if(rep=='o'||rep=='O')
-    {
-        Livre l;
-        fstream f;
-        try{
-        l.ecriture_fichier(f);
-        l.lecture_fichier(f);}
-        catch(Erreur)
-        {
-            cerr<<"Ouverture echouee"<<endl;
-        }
-    }
-    cout<<"------------------------------------------------"<<endl;
-    cout<<"Voulez-vous saisir une serie de livres? ";
-    cin>>rep;
-    if(rep=='o'||rep=='O')
-    {
-        SerieLivres s;
-        cout<<"--------------Saisie d'une serie de livres-----------------"<<endl;
-        s.saisir();
-        cout<<"--------------Affichage d'une serie de livres--------------"<<endl;
-        s.afficher();
-        cout<<"------------------------------------------------"<<endl;
-        cout<<"Voulez-vous chercher un livre dans la serie? ";
-        char rep1;
-        cin>>rep1;
-        if(rep1=='O'||rep1=='o')
-        {
-            cout<<"Donner l'id du livre que vous cherchez: ";
-            string id;
-            cin>>id;
-            s.rechercher_par_id(id);
-        }
-    }
-
-}
-
-
-
-int main()
-{
-
-    int choix;
-    Admin a;
-    map<int,Licence> mesLicenses;
-
-
-    do{
-        menu();
-        cin>>choix;
-        switch(choix){
-            case 1 : gestionDocuments(); break;
-            case 2 : gestionPersonnes(a); break;
-            case 3 : gestionLicenses(mesLicenses); break;
-            case 4 : cout<<"quitter programme......"<<endl; return 0;
+            case 4 : cout<<"quitter......"<<endl;break;
             default: cout<<"choix invalide !!"<<endl; break;
         }
 
     }while(choix!=4);
 
 
-    return 0;
 }
 
 
+void menu()
+{
+    cout<<"Choisir l'une des options suivantes:"<<endl;
+    cout<<"1. Gestion des documents de la bibliotheque numerique"<<endl;
+    cout<<"2. Gestion des personnes"<<endl;
+    cout<<"3. Gestion des licences"<<endl;
+    cout<<"4. Quitter"<<endl;
+}
+
+int main()
+{
+    int choix;
+    Admin a;
+    map<int,Licence> mesLicenses;
+    do
+        {
+            menu();
+            cin>>choix;
+            switch(choix)
+            {
+                case 1: gestionDocuments(); break;
+                case 2: gestionPersonnes(a); break;
+                case 3 : gestionLicenses(mesLicenses); break;
+                case 4: cout<<"Quitter le programme..."<<endl;break;
+                default: cout<<"Choic invalide!"<<endl;break;
+            }
+        }while(choix!=4);
+
+
+    return 0;
+}

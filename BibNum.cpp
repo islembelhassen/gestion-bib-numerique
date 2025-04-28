@@ -243,7 +243,7 @@ BibNum& BibNum::operator=(const BibNum&b)
 
 void BibNum::ouvrir_fichier(fstream& f)
 {
-    f.open("C:\\Users\\Ons\\Desktop\\enicar\\1ère année\\semestre 2\\Programmation orienté objet\\projet vf - Copie\\ficherbib.txt",ios::in|ios::out|ios::trunc);
+    f.open("ficherbib.txt",ios::in|ios::out|ios::trunc);
     if(!f.is_open()) throw -1;
 }
 

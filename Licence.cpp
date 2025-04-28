@@ -146,7 +146,7 @@ void Licence::supprimerDocument(string idDocument) {
 
     bool found = false;
     auto it = documents.begin();
-    while (it != documents.end()) {
+    while (it != documents.end() && !found) {
         if (*it != nullptr && (*it)->get_id() == idDocument) {
             delete *it;
             it = documents.erase(it);
@@ -170,13 +170,13 @@ Licence& Licence::operator=(const Licence& licence) {
         TVA = licence.TVA;
         tot = licence.tot;
 
-        // Clear existing documents
+
         for (Document* doc : documents) {
             delete doc;
         }
         documents.clear();
 
-        // Deep copy documents
+
         for (Document* doc : licence.documents) {
             if (doc != nullptr) {
                 if (dynamic_cast<Livre*>(doc)) {

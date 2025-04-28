@@ -26,7 +26,7 @@ Document::Document(const Document &d)
     prix=d.prix;
     datepub=d.datepub;
     for(int i=0;i<d.description.size();i++)
-        description[i]=d.description[i];
+        description.push_back(new MotCle(*d.description[i]));
 }
 
 void Document::saisir()
@@ -39,9 +39,9 @@ void Document::saisir()
     cin>>prix;
     datepub.saisir();
     char rep;
-    MotCle* m=new MotCle();
     do
     {
+        MotCle* m=new MotCle();
         cout<<"Remplissage de la description"<<endl;
         m->saisir();
         description.push_back(m);
@@ -102,7 +102,7 @@ Date Document::get_datepub()
 
 void Document::ajouter_description()
 {
-    MotCle* m;
+    MotCle* m=new MotCle;
     m->saisir();
     description.push_back(m);
 }
@@ -145,7 +145,7 @@ ostream& operator<<(ostream& o,Document& d)
     o<<"ID: "<<d.id<<endl;
     o<<"Titre: "<<d.titre<<endl;
     o<<"Prix: "<<d.prix<<endl;
-    o<<"Date de publication: "<<d.datepub;
+    o<<"Date de publication: "<<d.datepub<<endl;
     o<<"Description: "<<endl;
     for(int i=0;i<d.description.size();i++)
     {
@@ -182,7 +182,7 @@ ostream& operator<<(ostream& o,Document* d)
     o<<"ID: "<<setw(10)<<d->id<<endl;
     o<<"Titre: "<<setw(10)<<d->titre<<endl;
     o<<"Prix: "<<setw(10)<<d->prix<<endl;
-    o<<"Date de publication: "<<setw(10)<<d->datepub;
+    o<<"Date de publication: "<<setw(10)<<d->datepub<<endl;
     return o;
 }
 

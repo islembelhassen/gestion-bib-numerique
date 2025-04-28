@@ -226,7 +226,7 @@ ostream& operator<<(ostream& o, const Admin* a) {
 istream& operator>>(istream& i, Admin* a) {
 
     i >> static_cast<Personne*>(a);
-/*
+
     i >> static_cast<Role*>(a);
 
     i >> a->date_prise_fct;
@@ -238,7 +238,7 @@ istream& operator>>(istream& i, Admin* a) {
         Lecteur* l = new Lecteur();
         i >> *l;
         a->lecteurs.push_back(l);
-    }*/
+    }
     return i;
 }
 

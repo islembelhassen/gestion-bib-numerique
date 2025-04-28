@@ -44,6 +44,13 @@ int Chapitre::get_nbrpages()
     return nbrpages;
 }
 
+Chapitre& Chapitre::operator+(const Chapitre& c)
+{
+    this->titre=this->titre+c.titre;
+    this->nbrpages=this->nbrpages+c.nbrpages;
+    return *this;
+}
+
 Chapitre::~Chapitre(){}
 
 ostream& operator<<(ostream& o,Chapitre& c)

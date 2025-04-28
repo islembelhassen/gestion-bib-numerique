@@ -36,6 +36,11 @@ string Magazine::get_edition()
 
 Magazine::~Magazine(){}
 
+bool Magazine::operator==(const Magazine& m)const
+{
+        return (this->id==m.id);
+}
+
 ostream& operator<<(ostream& o,Magazine& m)
 {
     Document* d=&m;

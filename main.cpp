@@ -100,9 +100,27 @@ void gestionDocuments()
         s.saisir();
         cout<<"--------------Affichage d'une serie de livres--------------"<<endl;
         s.afficher();
-        cout<<"------------------------------------------------"<<endl;
-        cout<<"Voulez-vous chercher un livre dans la serie? ";
+        cout<<"Voulez-vous ajouter un livre? ";
         char rep1;
+        cin>>rep1;
+        if(rep1=='O'||rep1=='o')
+        {
+            s.ajouter_livre();
+            cout<<"--------------Affichage d'une serie de livres apres ajout--------------"<<endl;
+            s.afficher();
+        }
+        cout<<"Voulez-vous supprimer un livre? ";
+        cin>>rep1;
+        if(rep1=='O'||rep1=='o')
+        {
+            string id;
+            cout<<"Donner l'id du livre a supprimer: ";
+            cin>>id;
+            s.supprimer_livre(id);
+            cout<<"--------------Affichage d'une serie de livres apres suppression--------------"<<endl;
+            s.afficher();
+        }
+        cout<<"Voulez-vous chercher un livre dans la serie? ";
         cin>>rep1;
         if(rep1=='O'||rep1=='o')
         {

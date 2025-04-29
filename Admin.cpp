@@ -3,6 +3,15 @@
 
 using namespace std;
 
+string Admin::ticket="ce ticket pour ladmin";
+string Admin::getTicket() {
+    return ticket;
+}
+void Admin::setTicket(const string& newTicket) {
+    ticket = newTicket;
+}
+
+
 Admin::Admin(string nom, string prenom, Date datenaissance, string email, int tel,
              string role, float salaire, Date datePriseFct, string id)
     : Personne(nom, prenom, datenaissance, email, tel),

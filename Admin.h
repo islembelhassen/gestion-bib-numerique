@@ -11,6 +11,7 @@ class Admin : public Personne , public Role {
         Date date_prise_fct;
         string idA;
         vector<Lecteur*> lecteurs;
+        static string ticket;
     public:
         Admin(string="",string="", Date=Date(),string="",int=0,string="", float=0.0,Date=Date(),string="");
         void set_idA(string);
@@ -33,6 +34,10 @@ class Admin : public Personne , public Role {
         void lecture_fichier(fstream&);
         friend ostream& operator<<(ostream&, const Admin*);
         friend istream& operator>>(istream&, Admin*);
+
+
+        static string getTicket();
+        static void setTicket(const string& newTicket);
 };
 
 

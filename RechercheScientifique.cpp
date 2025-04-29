@@ -5,6 +5,14 @@
 #include<iomanip>
 using namespace std;
 
+int RechercheScientifique::duree=365;
+int RechercheScientifique::getDuree() {
+    return duree;
+}
+void RechercheScientifique::setDuree(const int& d) {
+    duree=d;
+}
+
 
 RechercheScientifique::RechercheScientifique(string id,string titre,float prix,Date datepub,string institut):Document(id,titre,prix,datepub)
 {

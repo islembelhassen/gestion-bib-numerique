@@ -7,7 +7,7 @@
 using namespace std;
 
 class Magazine: public Document{
-string edition;
+    string edition;
 public:
     Magazine(string="",string="",float=0,Date=Date(),string="");
     virtual void saisir()override;

@@ -9,8 +9,9 @@ class Licence{
         int numL;
         string titre;
         list<Document*> documents;
-        float TVA;
+        float TVA; //static float TVA
         float tot;
+
 
     public:
         Licence();

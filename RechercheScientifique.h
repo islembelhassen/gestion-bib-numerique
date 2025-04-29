@@ -7,6 +7,7 @@ using namespace std;
 
 class RechercheScientifique: public Document{
 string institut;
+static int duree;
 public:
     RechercheScientifique(string="",string="",float=0,Date=Date(),string="");
     virtual void saisir()override;
@@ -17,6 +18,9 @@ public:
     friend ostream& operator<<(ostream&,RechercheScientifique*);
     friend istream& operator>>(istream&,RechercheScientifique&);
     virtual ~RechercheScientifique();
+
+    static int getDuree();
+    static void setDuree(const int&);
 }; ostream& operator<<(ostream&,RechercheScientifique&);
    istream& operator>>(istream&,RechercheScientifique&);
 
